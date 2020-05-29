@@ -5,7 +5,14 @@ const self = this;
 
 // Install sw
 self.addEventListener('install', (event) => {
+    event.waitUntil(
+        caches.open(CACHE_NAME)
+            .then((cache) => {
+                console.log('Open cache');
 
+                return cache.addAll(urlsToCache);
+            })
+    );
 });
 
 // Listen for requests
